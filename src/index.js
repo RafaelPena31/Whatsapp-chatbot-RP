@@ -51,6 +51,7 @@ app.get("/start", (req, res) => {
 
   // Writes QR in specified path
   function exportQR(qrCode, path) {
+    console.log("foi");
     qrCode = qrCode.replace("data:image/png;base64,", "");
     const imageBuffer = Buffer.from(qrCode, "base64");
 
