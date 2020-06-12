@@ -3,10 +3,9 @@ const venom = require("venom-bot");
 const fs = require("fs");
 const stages = require("./stages");
 const cors = require("cors");
-
+const app = express();
 app.use(cors());
 
-const app = express();
 app.listen(3000, () => {
   console.log("Server rodando na 3000...");
 });
