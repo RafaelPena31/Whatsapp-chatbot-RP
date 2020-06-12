@@ -13,5 +13,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "venom-bot": "^1.0.0"
-  }
+  },
+  "scripts": {
+    "start": "node scr/index.js"
+}
 }
