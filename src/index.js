@@ -2,6 +2,9 @@ const express = require("express");
 const venom = require("venom-bot");
 const fs = require("fs");
 const stages = require("./stages");
+const cors = require("cors");
+
+app.use(cors());
 
 const app = express();
 app.listen(3000, () => {
@@ -10,7 +13,7 @@ app.listen(3000, () => {
 app.use(express.static(__dirname + "/qrcode"));
 let qr;
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send(`
       <html>
           <head>
@@ -23,7 +26,7 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.get('/start', (req, res) => {
+app.get("/start", (req, res) => {
   res.send(`
       <html>
           <head>
@@ -34,28 +37,28 @@ app.get('/start', (req, res) => {
           </body>
       </html>
   `);
-  venom.create("session-qr", (base64Qr, asciiQR) => {
-    // To log the QR in the terminal
-    console.log(asciiQR);
+  venom
+    .create("session-qr", (base64Qr, asciiQR) => {
+      // To log the QR in the terminal
+      console.log(asciiQR);
 
-    // To write it somewhere else in a file
-    exportQR(base64Qr, "src/qrcode/qr.png");
-  })
-  .then((client) => start(client));
+      // To write it somewhere else in a file
+      exportQR(base64Qr, "src/qrcode/qr.png");
+    })
+    .then((client) => start(client));
 
-// Writes QR in specified path
-function exportQR(qrCode, path) {
-  qrCode = qrCode.replace("data:image/png;base64,", "");
-  const imageBuffer = Buffer.from(qrCode, "base64");
+  // Writes QR in specified path
+  function exportQR(qrCode, path) {
+    qrCode = qrCode.replace("data:image/png;base64,", "");
+    const imageBuffer = Buffer.from(qrCode, "base64");
 
-  // Creates 'marketing-qr.png' file
+    // Creates 'marketing-qr.png' file
 
-  fs.writeFileSync(path, imageBuffer);
-}
+    fs.writeFileSync(path, imageBuffer);
+  }
 });
 
 // Second create() parameter is the QR callback
-
 
 function getStage(user) {
   return bancodb[user].stage;
