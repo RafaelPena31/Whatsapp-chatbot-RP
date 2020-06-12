@@ -35,7 +35,7 @@ app.get("/start", (req, res) => {
               <meta charset="utf-8">
           </head>
           <body>
-              <h1>Rota de start</h1>
+              <h1>Rota de start 1</h1>
           </body>
       </html>
   `);
