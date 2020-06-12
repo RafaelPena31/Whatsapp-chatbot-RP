@@ -1,12 +1,15 @@
+require('dotenv').config();
+
 const express = require("express");
 const venom = require("venom-bot");
 const fs = require("fs");
 const stages = require("./stages");
 const cors = require("cors");
-const app = express();
+
 app.use(cors());
 
-app.listen(3000, () => {
+
+app.listen(process.env.PORT || 3001, () => {
   console.log("Server rodando na 3000...");
 });
 app.use(express.static(__dirname + "/qrcode"));
