@@ -7,6 +7,7 @@ const stages = require("./stages");
 const cors = require("cors");
 
 const app = express();
+const browser = await puppeteer.launch({ headless: true, args:['--no-sandbox', '--disable-setuid-sandbox'] })
 app.use(cors());
 
 app.listen(process.env.PORT || 3001, () => {
